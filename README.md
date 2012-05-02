@@ -1,4 +1,4 @@
 stuff
 =====
 
-Stuff I like to keep around
+Misc stuff I like to keep around.
