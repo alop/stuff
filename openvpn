@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# start stop script for openvpn on OS X installed from macports
+
+if [ $( whoami ) != "root" ]; then
+  echo "You must be root to run this script"
+  exit 1
+fi
+
+CONF_DIR="/etc/openvpn"
+
+if [ $2 ]; then
+  CONFIG="${CONF_DIR}/${2}.conf"
+  else
+    CONFIG=`ls ${CONF_DIR}/*.conf | head -1`
+fi
+PIDFILE=/var/run/openvpn.pid
+
+case $1 in
+start)
+  echo $CONFIG $PIDFILE
+  /opt/local/sbin/openvpn2 --cd $CONF_DIR --config $CONFIG --daemon --writepid $PIDFILE
+    ;;
+
+stop)
+  kill `cat $PIDFILE` || true
+  rm -f $PIDFILE
+  ;;
+
+restart)
+  shift
+  $0 stop ${@}
+  sleep 1
+  $0 start ${@}
+  ;;
+
+reload)
+  kill -USR1 `cat $PIDFILE`
+
+*)
+echo "Usage: $0 {start|stop|restart} [site]"
+exit 1
+;;
+esac
+
