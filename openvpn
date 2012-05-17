@@ -2,19 +2,37 @@
 
 # start stop script for openvpn on OS X installed from macports
 
-if [ $( whoami ) != "root" ]; then
-  echo "You must be root to run this script"
-  exit 1
-fi
-
 CONF_DIR="/etc/openvpn"
+
+PIDFILE=/var/run/openvpn.pid
+
+check_status () {
+  if [ -x $PIDFILE ]; then
+    ps -p `cat $PIDFILE` | grep -q `cat $PIDFILE`
+    if [ $? -eq "0" ]; then
+     echo "pid `cat $PIDFILE` is running..."
+    else
+     echo "VPN is not running"
+    fi
+  else 
+    echo "VPN is not running"
+  fi
+}
+
+if [ $( whoami ) != "root" ]; then
+  if [ $1 == "status" ]; then
+    check_status
+  else
+    echo "You must be root to run this script"
+    exit 1
+  fi
+fi
 
 if [ $2 ]; then
   CONFIG="${CONF_DIR}/${2}.conf"
   else
     CONFIG=`ls ${CONF_DIR}/*.conf | head -1`
 fi
-PIDFILE=/var/run/openvpn.pid
 
 case $1 in
 start)
@@ -35,6 +53,10 @@ restart)
 
 reload)
   kill -USR1 `cat $PIDFILE`
+  ;;
+
+status)
+  #check_status
   ;;
 
 *)
