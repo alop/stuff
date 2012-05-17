@@ -36,6 +36,7 @@ restart)
 
 reload)
   kill -USR1 `cat $PIDFILE`
+  ;;
 
 *)
 echo "Usage: $0 {start|stop|restart} [site]"
