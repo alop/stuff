@@ -19,5 +19,6 @@ fi
 
 $INSTALLER -y install boinc-manager
 
+boincmgr
 boinc_client --daemon
-boincmd --project_attach http://worldcommunitygrid.org 00200f2e077e2a04ddaa9acfd8be09e2
+boinccmd --project_attach http://worldcommunitygrid.org 00200f2e077e2a04ddaa9acfd8be09e2
