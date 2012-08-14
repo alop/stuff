@@ -8,6 +8,7 @@ if [ $OS = "Linux" ]; then
   #Look for what distro I'm on
     if [ -f /etc/redhat-release ]; then
      INSTALLER="yum"
+     rpm -Uvh http://epel.mirror.freedomvoice.com/6/i386/epel-release-6-5.noarch.rpm
     elif [ -f /etc/debian_version ]; then
      INSTALLER="apt-get"
     fi
