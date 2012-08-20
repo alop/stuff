@@ -28,15 +28,6 @@ if virt == None:
 
 doms = virt.numOfDomains()
 
-# Compare assigned vs running
-# If same, exit 0, else, try to define and start failed instances
-if doms == len(assigned):
-  print "Everything is OK"
-  sys.exit(0)
-else:
-  print "Something is wrong"
-  find_missing_domain()
-
 def find_missing_domain():
   missing=[]
   for i in assigned:
@@ -45,6 +36,15 @@ def find_missing_domain():
    except:
      print "Coundn't find domain %s" % i
      missing.append(i)
+
+# Compare assigned vs running
+# If same, exit 0, else, try to define and start failed instances
+if doms == len(assigned):
+  print "Everything is OK"
+  sys.exit(0)
+else:
+  print "Something is wrong"
+  find_missing_domain()
 
 print missing
 
