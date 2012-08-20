@@ -42,8 +42,9 @@ def define_missing_domain(id):
   conf = instance_dir + id + "/libvirt.xml"
   f = open(conf)
   xml = f.read()
-  virt.defineXML(xml)
-  dom = virt.lookupByName(id)
+  virt2 = libvirt.open(None)
+  virt2.defineXML(xml)
+  dom = virt2.lookupByName(id)
   dom.create()
 
 # Compare assigned vs running
