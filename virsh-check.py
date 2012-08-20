@@ -38,7 +38,7 @@ def find_missing_domain():
      missing.append(i)
   return missing
 
-def define_missing_domain(id)
+def define_missing_domain(id):
   conf = instance_dir . id . "libvirt.xml"
   f = open(conf)
   xml = f.read()
