@@ -36,7 +36,8 @@ def find_missing_domain():
    except:
      print "Coundn't find domain %s" % i
      missing.append(i)
-  return i
+  print "These are the missing domains %s" % missing
+  return missing
 
 def define_missing_domain(id):
   conf = instance_dir + id + "/libvirt.xml"
