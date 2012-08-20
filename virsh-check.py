@@ -26,8 +26,7 @@ if virt == None:
   print 'Failed to talke to hypervisor'
   sys.exit(1)
 
-try:
-  doms = virt.numOfDomains()
+doms = virt.numOfDomains()
 
 if doms == len(assigned):
   print "Everything is OK"
