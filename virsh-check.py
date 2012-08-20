@@ -54,7 +54,8 @@ if doms == len(assigned):
 else:
   print "Something is wrong"
   miss_dom = find_missing_domain()
+  print miss_dom
   print "Trying to define missing domain"
-  define_missing_domain( str(miss_dom) )
+  #define_missing_domain( str(miss_dom) )
 
 
