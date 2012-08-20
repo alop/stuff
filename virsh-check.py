@@ -39,7 +39,7 @@ def find_missing_domain():
   return missing
 
 def define_missing_domain(id):
-  conf = instance_dir + id + "libvirt.xml"
+  conf = instance_dir + str(id).strip('[]') + "libvirt.xml"
   f = open(conf)
   xml = f.read()
   virt.defineXML(xml)
