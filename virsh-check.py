@@ -36,6 +36,15 @@ def find_missing_domain():
    except:
      print "Coundn't find domain %s" % i
      missing.append(i)
+  return missing
+
+def define_missing_domain(id)
+  conf = instance_dir . id . "libvirt.xml"
+  f = open(conf)
+  xml = f.read()
+  virt.defineXML(xml)
+  dom = virt.lookupByName(id)
+  dom.create()
 
 # Compare assigned vs running
 # If same, exit 0, else, try to define and start failed instances
@@ -44,7 +53,8 @@ if doms == len(assigned):
   sys.exit(0)
 else:
   print "Something is wrong"
-  find_missing_domain()
+  miss_dom = find_missing_domain()
+  print "Trying to define missing domain"
+  define_missing_domain(miss_dom)
 
-print missing
 
