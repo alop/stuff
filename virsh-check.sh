@@ -15,5 +15,21 @@ if [[ ${#ASSIGNED[@]} -eq ${#RUNNING[@]} ]]; then
   exit 0
   else
     echo "Something is not right"
+    # Call out comparison function to find which instance is down
+    find_stopped()
     exit 1
 fi
+
+find_stopped()
+{
+  declare -a FIXME
+ for i in ${RUNNING[@]}; do
+   for j in ${ASSIGNED[@]}; do
+     if [[ $i == $j ]] ; then # This instance is running
+       
+      else
+
+
+
+
+
