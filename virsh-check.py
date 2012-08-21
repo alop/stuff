@@ -39,13 +39,13 @@ def find_missing_domain():
   print "These are the missing domains %s" % missing
   return missing
 
-def define_missing_domain(id):
-  conf = instance_dir + id + "/libvirt.xml"
+def define_missing_domain(domid):
+  conf = instance_dir + domid + "/libvirt.xml"
   f = open(conf)
   xml = f.read()
   virt2 = libvirt.open(None)
   virt2.defineXML(xml)
-  dom = virt2.lookupByName(id)
+  dom = virt2.lookupByName(domid)
   dom.create()
 
 # Compare assigned vs running
