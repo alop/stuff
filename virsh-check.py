@@ -30,7 +30,7 @@ doms = virt.numOfDomains()
 
 def find_missing_domain():
   missing=[]
-  running = virt.listDefinedDomains()
+  running = virt.listDomainsID()
   print running
   print assigned
   for j in assigned:
