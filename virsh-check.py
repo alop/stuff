@@ -36,7 +36,8 @@ def find_missing_domain():
    except:
      print "Coundn't find domain %s" % j
      missing.append(j)
-  print "These are the missing domains %s" % missing
+  for m in missing:
+    print "These are the missing domains %s" % m
   return missing
 
 def define_missing_domain(domid):
