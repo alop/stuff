@@ -29,17 +29,7 @@ if virt == None:
 doms = virt.numOfDomains()
 
 def find_missing_domain():
-  missing=[]
-  running = virt.listDomainsID()
-  print running
-  print assigned
-  for j in assigned:
-    print "looking for domain %s" % j
-    if j in running:
-      print "I found %s" % j
-    else:
-      print "I did not find %s" % j
-      missing.append(j)
+  missing = virt.listDefinedDomains()
   return missing
 
 def define_missing_domain(domid):
