@@ -33,7 +33,8 @@ def find_missing_domain():
   for j in assigned:
     print "looking for domain %s" % j
     try:
-     virt.lookupByName(j)
+     dom = virt.lookupByName(j)
+     dom.info()
     except:
      print "Coundn't find domain %s" % j
      missing.append(j)
