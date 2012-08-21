@@ -45,12 +45,14 @@ def define_missing_domain(domid):
 # If same, exit 0, else, try to define and start failed instances
 if doms == len(assigned):
   print "Everything is OK"
+  virt.close()
   sys.exit(0)
 else:
   print "Something is wrong"
   miss_dom = find_missing_domain()
   print miss_dom
   print "Trying to define missing domain"
-  define_missing_domain( miss_dom )
+  for m in miss_dom:
+    define_missing_domain( m )
 
 
