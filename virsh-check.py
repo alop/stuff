@@ -35,7 +35,7 @@ def find_missing_domain():
     print "looking for domain %s" % j
     if j in running:
       print "I found %s" % j
-    else
+    else:
       print "I did not find %s" % j
       missing.append(j)
   return missing
