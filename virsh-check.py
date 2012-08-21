@@ -10,23 +10,21 @@ import sys
 # look in the nova dir
 
 instance_dir = '/var/lib/nova/instances/'
-instances = os.listdir( instance_dir )
+instances = os.listdir(instance_dir)
 assigned=[]
 for i in instances:
   if i.startswith('instance-'):
     assigned.append(i)
-
-#print assigned
 
 # connect to libvirt to find out how many instances are
 # *actually* running
 
 virt = libvirt.openReadOnly(None)
 if virt == None:
-  print 'Failed to talke to hypervisor'
+  print 'Failed to talk to hypervisor'
   sys.exit(1)
 
-doms = virt.numOfDomains()
+numDoms = virt.numOfDomains()
 
 def find_missing_domain():
   missing = []
@@ -35,6 +33,7 @@ def find_missing_domain():
       name = virt.lookupByName(a)
     except:
       missing.append(a)
+  virt.close()
   return missing
 
 def define_missing_domain(domid):
@@ -45,19 +44,19 @@ def define_missing_domain(domid):
   virt2.defineXML(xml)
   dom = virt2.lookupByName(domid)
   dom.create()
+  virt2.close()
 
 # Compare assigned vs running
 # If same, exit 0, else, try to define and start failed instances
-if doms == len(assigned):
+if numDoms == len(assigned):
   print "Everything is OK"
   virt.close()
   sys.exit(0)
 else:
   print "Something is wrong"
-  miss_dom = find_missing_domain()
-  print miss_dom
+  missDom = find_missing_domain()
   print "Trying to define missing domain"
-  for m in miss_dom:
-    define_missing_domain( m )
+  for m in missDom:
+    define_missing_domain(m)
 
 
