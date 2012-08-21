@@ -59,6 +59,6 @@ else:
   miss_dom = find_missing_domain()
   print miss_dom
   print "Trying to define missing domain"
-  define_missing_domain( miss_dom )
+  #define_missing_domain( miss_dom )
 
 
