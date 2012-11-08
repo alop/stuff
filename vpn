@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+DOMAINS="att.com sbc.com"
+
+set_up_dns()
+{
+  if [ ! -d /etc/resolver ]
+    then
+    sudo mkdir /etc/resolver
+  fi
+# vpnc should do this automatically but it appears
+# to be broken at the moment.
+for i in `echo $DOMAINS` 
+  do
+cat <<EOF | sudo tee -a /etc/resolver/$i
+domain $i
+nameserver 135.179.16.132
+nameserver 135.179.16.133
+EOF
+done
+}
+
+tear_down_dns() {
+  for i in $DOMAINS
+    do
+    sudo rm /etc/resolver/$i
+    done
+}
+
+case "$1" in
+
+start)
+  sudo vpnc ATT
+  set_up_dns
+  ;;
+stop)
+  sudo vpnc-disconnect
+  tear_down_dns
+  ;;
+status)
+  VLINE=$(ps -ef | grep vpnc | grep -v grep)
+  if [ -z "$VLINE" ]; then
+    echo "VPN not started"
+  else
+    echo "VPN started"
+  fi
+  ;;
+restart)
+  sudo vpnc-disconnect
+  sudo vpnc ATT
+  set_up_dns
+  ;;
+*)
+  echo "Usage: vpn (start|stop|status|restart)"
+  exit 1
+  ;;
+esac
