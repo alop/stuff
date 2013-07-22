@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DOMAINS="att.com sbc.com"
+DOMAINS="att.com sbc.com cingular.net"
 
 set_up_dns()
 {
@@ -21,10 +21,7 @@ done
 }
 
 tear_down_dns() {
-  for i in $DOMAINS
-    do
-    sudo rm /etc/resolver/$i
-    done
+    sudo rm -rf /etc/resolver
 }
 
 case "$1" in
@@ -41,6 +38,10 @@ status)
   VLINE=$(ps -ef | grep vpnc | grep -v grep)
   if [ -z "$VLINE" ]; then
     echo "VPN not started"
+    if [ -d /etc/resolver ]
+      then
+      tear_down_dns
+    fi
   else
     echo "VPN started"
   fi

@@ -5,8 +5,8 @@ if [ -z $1 ]; then
   exit 1
 fi
 
-if [ -f .swiftrc ]; then
-  source .swiftrc
+if [ -f ~/.swiftrc ]; then
+  source ~/.swiftrc
 else
   echo "swift credentials not available"
   exit 1
