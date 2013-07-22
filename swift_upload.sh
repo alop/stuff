@@ -17,7 +17,7 @@ SIZE=`ls -l $IMAGE | awk '{print $5}'`
 
 swiftcmd="swift -A $OS_AUTH_URL -U ${OS_TENANT_NAME}:${OS_USERNAME} -K $OS_PASSWORD"
 
-CONTAINER='images'
+CONTAINER="images"
 
 $swiftcmd upload -S 209715200 $CONTAINER $IMAGE
 
