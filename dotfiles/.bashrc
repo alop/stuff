@@ -2,7 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-source ~/.git-prompt.sh 
+source ~/.git-prompt.sh
+export CLICOLOR=1
+export EDITOR=vim
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -107,4 +109,24 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-source .git-completion.bash
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+source ~/.git-completion.bash
+eval $(ssh-agent)
+
+function cleanup {
+    echo "Killing SSH-Agent"
+    kill -9 $SSH_AGENT_PID
+}
+
+trap cleanup EXIT
+
+##
+# Your previous /Users/abelopez/.bash_profile file was backed up as /Users/abelopez/.bash_profile.macports-saved_2015-08-01_at_12:43:14
+##
+
+# MacPorts Installer addition on 2015-08-01_at_12:43:14: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin"
+# Finished adapting your PATH environment variable for use with MacPorts.
+
