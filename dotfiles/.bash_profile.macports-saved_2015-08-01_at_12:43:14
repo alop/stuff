@@ -2,13 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-export HOMEBREW_NO_ANALYTICS=1
-source ~/.git-prompt.sh
+source ~/.git-prompt.sh 
 export CLICOLOR=1
-export EDITOR=vim
-export WORKON_HOME=$HOME/.virtualenvs
-source Library/Python/2.7/bin/virtualenvwrapper.sh
-ulimit -n 4096
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -64,7 +59,7 @@ fi
 if [ "$color_prompt" = yes ]; then
     PS1='\[\e[00;34m\]\u\[\e[0m\]\[\e[00;32m\]@\[\e[0m\]\[\e[00;34m\]\h\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;34m\]\w\[\e[0m\]\[\e[00;37m\]\n\[\e[0m\]\[\e[00;32m\]\t\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[00;31m\]\\$\[\e[0m\]\[\e[00;37m\] \[\e[0m\] $(__git_ps1 " (%s)") '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w \T\[$(tput sgr0)\]$(__git_ps1 " (%s)")$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w $(__git_ps1 " (%s)")$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -116,7 +111,6 @@ fi
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
-export HOMEBREW_GITHUB_API_TOKEN="0e6b00af0fdb1a52e221ea046ef8de88ed1f4c1b"
 source ~/.git-completion.bash
 eval $(ssh-agent)
 
@@ -126,16 +120,3 @@ function cleanup {
 }
 
 trap cleanup EXIT
-
-##
-# Your previous /Users/abelopez/.bash_profile file was backed up as /Users/abelopez/.bash_profile.macports-saved_2015-08-01_at_12:43:14
-##
-
-# MacPorts Installer addition on 2015-08-01_at_12:43:14: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin"
-# Finished adapting your PATH environment variable for use with MacPorts.
-PRINTER=Brother_HL_L2380DW_series
-ssh-add -K &>/dev/null
-
-# Ansible-systems proxmox password vault
-export ANSIBLE_VAULT_PASSWORD_FILE="~/.config/ansible-systems/vault-proxmox.pass"
