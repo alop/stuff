@@ -118,9 +118,9 @@ fi
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
-#export HOMEBREW_GITHUB_API_TOKEN="0e6b00af0fdb1a52e221ea046ef8de88ed1f4c1b"
-export GITHUB_TOKEN="bbfceb8cf82636d7399f846f3cfa6b96967e20f3"
-#export GITHUB_TOKEN="525fc01a4a6a2184bbf32092e662a03c08183128"
+#export HOMEBREW_GITHUB_API_TOKEN=""
+export GITHUB_TOKEN=""
+#export GITHUB_TOKEN=""
 source ~/.git-completion.bash
 eval $(ssh-agent)
 
