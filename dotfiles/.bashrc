@@ -7,8 +7,10 @@ source ~/.git-prompt.sh
 export CLICOLOR=1
 export EDITOR=vim
 export WORKON_HOME=$HOME/.virtualenvs
-source Library/Python/2.7/bin/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
 ulimit -n 4096
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -42,7 +44,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color | xterm-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -62,7 +64,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='\[\e[00;34m\]\u\[\e[0m\]\[\e[00;32m\]@\[\e[0m\]\[\e[00;34m\]\h\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;34m\]\w\[\e[0m\]\[\e[00;37m\]\n\[\e[0m\]\[\e[00;32m\]\t\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[00;31m\]\\$\[\e[0m\]\[\e[00;37m\] \[\e[0m\] $(__git_ps1 " (%s)") '
+    PS1='\[\e[00;34m\]\u\[\e[0m\]\[\e[00;32m\]@\[\e[0m\]\[\e[00;34m\]\h\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[00;34m\]\w\[\e[0m\]\[\e[00;37m\]\n\[\e[0m\]\[\e[00;32m\]\t\[\e[0m\]\[\e[00;37m\] \[\e[0m\]\[\e[00;31m\]\\$\[\e[0m\]\[\e[00;37m\]\[\e[0m\] $(__git_ps1 " (%s)") '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w \T\[$(tput sgr0)\]$(__git_ps1 " (%s)")$ '
 fi
@@ -116,7 +118,9 @@ fi
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
-export HOMEBREW_GITHUB_API_TOKEN="0e6b00af0fdb1a52e221ea046ef8de88ed1f4c1b"
+#export HOMEBREW_GITHUB_API_TOKEN="0e6b00af0fdb1a52e221ea046ef8de88ed1f4c1b"
+export GITHUB_TOKEN="bbfceb8cf82636d7399f846f3cfa6b96967e20f3"
+#export GITHUB_TOKEN="525fc01a4a6a2184bbf32092e662a03c08183128"
 source ~/.git-completion.bash
 eval $(ssh-agent)
 
@@ -132,10 +136,16 @@ trap cleanup EXIT
 ##
 
 # MacPorts Installer addition on 2015-08-01_at_12:43:14: adding an appropriate PATH variable for use with MacPorts.
-export PATH="/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin"
+export PATH="/usr/local/bin:/usr/local/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/opt/local/bin:/opt/local/sbin:$GOROOT/bin:$GOPATH/bin"
 # Finished adapting your PATH environment variable for use with MacPorts.
 PRINTER=Brother_HL_L2380DW_series
 ssh-add -K &>/dev/null
 
 # Ansible-systems proxmox password vault
-export ANSIBLE_VAULT_PASSWORD_FILE="~/.config/ansible-systems/vault-proxmox.pass"
+export ANSIBLE_VAULT_PASSWORD_FILE="~/.config/engx-ansible"
+#export ANSIBLE_VAULT_PASSWORD_FILE="~/.config/ansible-systems/vault-proxmox.pass"
+#export KUBECONFIG=$HOME/.kube/config:$HOME/.kube/ciscolabs-staging/config:$HOME/ccp-tenant/config
+export KUBECONFIG=$HOME/.kube/config:$HOME/.kube/prod/abelopez.kubeconfig:~/.kube/prod/admin.conf
+export CX_ROOT=/Users/abelopez/go/src/wwwin-github.cisco.com/CPSG/ccp
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
