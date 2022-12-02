@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/abelopez/git/cisco/ansible-systems'
-let g:netrw_dirhist_2='/Users/abelopez/git/cisco/ansible-systems/roles/cisco.bind'
-let g:netrw_dirhist_3='/Users/abelopez/git/cisco/ansible-systems'
